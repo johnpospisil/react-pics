@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import unsplash from '../api/unsplash';
 import SearchBar from './SearchBar';
 
 // a class-based component
@@ -7,11 +7,8 @@ class App extends React.Component {
   state = { images: [] };
 
 onSearchSubmit = async (term) => {
-  const response = await axios.get('https://api.unsplash.com/search/photos', {
+  const response = await unsplash.get('/search/photos', {
     params: { query: term },
-    headers: {
-      Authorization: 'Client-ID 38d5c414f5c3c927f8391dae84b618211535b915ab1965da020eb5a762e993e0'
-    }
   });
   
   this.setState({ images: response.data.results});
